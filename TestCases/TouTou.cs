@@ -161,7 +161,7 @@ namespace ConsoleApplication1.TestCases
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Place Bet fail!!");
+                    Console.WriteLine(String.Format("Place Bet fail : {0}", e.Message.ToString()));
                     return BetNo;
                 }
             }

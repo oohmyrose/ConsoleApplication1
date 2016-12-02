@@ -7,38 +7,37 @@ namespace ConsoleApplication1.Extensions
 {
     public static class ElementVerify
     {
-        public static IWebElement IsElementExists(this IWebDriver driver, By by)
+        // Will wait for seconds by default 
+        public static IWebElement Wait(this IWebDriver driver, By by, int seconds = 10)
         {
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(seconds));
             IWebElement element;
-
 
             try
             {
                 wait.Until(ExpectedConditions.ElementExists(by));
                 element = driver.FindElement(by);
-                //wait.Until( dr => dr.FindElement(by));
-                Console.WriteLine(String.Format("Element exists"));
+                WriteConsole.DarkCyan(String.Format("Element found --> {0}", by.ToString()));
                 return element;
             }
-            catch (OpenQA.Selenium.NoSuchElementException)
+            catch (OpenQA.Selenium.NoSuchElementException e)
             {
-                Console.WriteLine(String.Format("NoSuchElementException"));
+                WriteConsole.DarkMagenta(String.Format("NoSuchElementException of Wait : {0}", e.Message.ToString()));
                 return null;
             }
-            catch (OpenQA.Selenium.NotFoundException)
+            catch (OpenQA.Selenium.NotFoundException e)
             {
-                Console.WriteLine(String.Format("NotFoundException"));
+                WriteConsole.DarkMagenta(String.Format("NotFoundException of Wait : {0}", e.Message.ToString()));
                 return null;
             }
-            catch (System.TimeoutException)
+            catch (System.TimeoutException e)
             {
-                Console.WriteLine(String.Format("TimeoutException"));
+                WriteConsole.DarkMagenta(String.Format("TimeoutException of Wait : {0}", e.Message.ToString()));
                 return null;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                Console.WriteLine(String.Format("Exception"));
+                WriteConsole.DarkMagenta(String.Format("Exception of Wait : {0}", e.Message.ToString()));
                 return null;
             }
 
@@ -49,25 +48,12 @@ namespace ConsoleApplication1.Extensions
     public static class ElementExtensions
     {
 
-        public static void DoAction(Action action)
-        {
-            switch (action)
-            {
-                case Action.ClickOnIt:
-                    break;
-
-            }
-               
-
-        }
 
         public static void EnterText    (this IWebElement element, string elementName, string text)
         {
             element.Clear();
-            //element.Click();
             element.SendKeys(text);
-            //element.Click();
-            Console.WriteLine(String.Format("[{0}] : key in [{1}]", elementName,text));
+            WriteConsole.Cyan(String.Format("[{0}] : key in [{1}]", elementName, text));
         }
 
         public static void MouseOver    (this IWebElement element, IWebDriver driver, string elementName)
@@ -75,8 +61,8 @@ namespace ConsoleApplication1.Extensions
             Actions action = new Actions(driver);
 
             //Hover Element
-            action.MoveToElement(element).Perform();     //action.MoveToElement(element).Click().Perform(); //hover then click
-            Console.WriteLine(String.Format("[{0}] : Hovered", elementName));  
+            action.MoveToElement(element).Perform();
+            WriteConsole.Cyan(String.Format("[{0}] : Hovered", elementName));  
         }
 
         public static void MouseOverThenClick(this IWebElement element, IWebDriver driver, string elementName)
@@ -85,7 +71,7 @@ namespace ConsoleApplication1.Extensions
 
             //Hover Element
             action.MoveToElement(element).Click().Perform();     //action.MoveToElement(element).Click().Perform(); //hover then click
-            Console.WriteLine(String.Format("[{0}] : Hovered then click", elementName));
+            WriteConsole.Cyan(String.Format("[{0}] : Hovered then click", elementName));
         }
 
         public static bool IsDisplayed  (this IWebElement element, string elementName)
@@ -94,12 +80,12 @@ namespace ConsoleApplication1.Extensions
             try
             {
                 result = element.Displayed;
-                Console.WriteLine(String.Format("[{0}] : Displayed",elementName));
+                WriteConsole.Cyan(String.Format("[{0}] : Displayed", elementName));
             }
             catch(Exception)
             {
                 result = false;
-                Console.WriteLine(String.Format("[{0}] : not Displayed",elementName));
+                WriteConsole.Cyan(String.Format("[{0}] : not Displayed", elementName));
             }
  
             return result;            
@@ -108,42 +94,32 @@ namespace ConsoleApplication1.Extensions
         public static void ClickOnIt    (this IWebElement element, string elementName)
         {
             element.Click();
-            Console.WriteLine(String.Format("[{0}] : clicked", elementName)); 
+            WriteConsole.Cyan(String.Format("[{0}] : clicked", elementName)); 
         }
 
         public static void SelectByText (this IWebElement element, string elementName, string text)
         {
             SelectElement oSelect = new SelectElement(element);
             oSelect.SelectByText(text);
-            Console.WriteLine(String.Format("[{0}] : select [{1}]",elementName,text));
+            WriteConsole.Cyan(String.Format("[{0}] : select [{1}]", elementName, text));
         }
 
         public static void SelectByIndex(this IWebElement element, string elementName, int index)
         {
             SelectElement oSelect = new SelectElement(element);
             oSelect.SelectByIndex(index);
-            Console.WriteLine(String.Format("{0} : select [{1}]",elementName,index));
+            WriteConsole.Cyan(String.Format("{0} : select [{1}]", elementName, index));
         }
 
         public static void SelectByValue(this IWebElement element, string elementName, string text)
         {
             SelectElement oSelect = new SelectElement(element);
             oSelect.SelectByValue(text);
-            Console.WriteLine(String.Format("[{0}] : select [{1}]", elementName, text));
+            WriteConsole.Cyan(String.Format("[{0}] : select [{1}]", elementName, text));
         }
  
     }
 
-    public enum Action
-    {
-        EnterText,
-        MouseOver,
-        IsDisplayed,
-        ClickOnIt,
-        SelectByText,
-        SelectByIndex,
-        SelectByValue
-    }
     
 
 }

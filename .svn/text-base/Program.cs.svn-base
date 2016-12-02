@@ -1,5 +1,7 @@
 ﻿using ConsoleApplication1.TestCases;
+using ConsoleApplication1.Extensions;
 using System;
+using System.Windows.Input;
 
 namespace ConsoleApplication1
 {
@@ -7,45 +9,61 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
-            try
+            TheEnvironment envi;
+
+            for (int i = 0; i < args.Length; i++)
             {
-                GMM.Login(Enviromment.UAT);
-                GMM.CreateEvent();    
-                string eventid = GMM.GoToMMPage().Trim();
-                GMM.UpdateOdds();
-                GMM.OpenMarket();
+                try
+                {
+                    Enum.TryParse(args[i], out envi);
+                    GMM.Login(envi);
+                    string eventid = GMM.CreateEvent();
+                    GMM.GoToMMPage(eventid);
+                    GMM.UpdateOdds();
+                    GMM.OpenMarket();
 
 
-                TouTou.MemberSite.Login();
-                string BetNo = TouTou.MemberSite.PlaceBet(eventid).Trim();
+                    TouTou.MemberSite.Login();
+                    string BetNo = TouTou.MemberSite.PlaceBet(eventid).Trim();
 
-              
-                TTBO.TTBOLogin();
-                TTBO.FindMember();
-                TTBO.FindWager(BetNo);
-                
-                GMM.KeepEvent();
-                GMM.ResultAndSettleEvent(eventid);
-                GMM.CheckReport(BetNo);
 
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Automation has succeeded");
-                Console.ResetColor();
+                    TTBO.TTBOLogin();
+                    TTBO.FindMember();
+                    TTBO.FindWager(BetNo);
 
+                    GMM.KeepEvent();
+                    GMM.ResultAndSettleEvent(eventid);
+                    GMM.CheckReport(BetNo);
+
+
+                    WriteConsole.Green("Automation has succeeded");
+                }
+                catch (Exception e)
+                {
+                    WriteConsole.Red(String.Format("Automation has failed : {0} ", e.Message.ToString()));
+
+                    switch (e.Message)
+                    {
+                        case "GMM Login Failed":
+                            // Excute other test cases       
+                            break;
+                        case "GMM CreateEvent Failed":
+                            // 
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                finally
+                {
+                    WriteConsole.Yellow("Test Automation Completed");
+                }
             }
-            catch (Exception e)
-            {
-                GMM.KeepEvent();
-
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Automation has failed");
-                Console.ResetColor();
-            }
-        }
-                 
+ 
+        
+        
+        }         
     }
-
-
 }
 
 

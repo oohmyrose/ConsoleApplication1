@@ -15,6 +15,10 @@ namespace ConsoleApplication1.PageObjects
         [FindsBy(How = How.Id, Using = "SiteLogin_LoginButton")]
         public IWebElement Submit { get; set; }
 
+        public By LoginErrorMessage  = By.Id("errormessage");
+        public By SiteMenuAfterLogin = By.Id("WebSiteMapMenu");
+
+
 
 
         public GMMLogin(IWebDriver driver) {
@@ -35,7 +39,7 @@ namespace ConsoleApplication1.PageObjects
 
         public By Report       = By.LinkText("Report");
         public By WagerEnquiry = By.LinkText("Wager Enquiry");
-
+        
 
         public GMMMenu(IWebDriver driver) {
             PageFactory.InitElements(driver, this);
@@ -48,7 +52,7 @@ namespace ConsoleApplication1.PageObjects
         [FindsBy(How = How.LinkText, Using = "Create")]
         public IWebElement Create { get; set; }
 
-
+        public By ParentEventId    = By.Id("mainContent_EventId");
 
         public GMMCreateEvent(IWebDriver driver) {
             PageFactory.InitElements(driver, this);
@@ -58,7 +62,7 @@ namespace ConsoleApplication1.PageObjects
     public class SettlementPage
     {
       
-        public By EventId       = By.Id("txtEventId");
+        public By EventId        = By.Id("txtEventId");
 
         [FindsBy(How = How.Id, Using = "txtFromDate")]
         public IWebElement StartDate { get; set; }
@@ -76,7 +80,7 @@ namespace ConsoleApplication1.PageObjects
         public By ActionButton    = By.XPath("//div[contains(@id ,'result_status_']/span[2]/a");
         public By ActionDropdown  = By.XPath("//*[@class='ui-dropdown-content action-content view'][contains(@style,'display: block')]");
         
-        public By ScorePopup      = By.XPath("//*[@class='ui-dropdown-content popup-content view'][contains(@style,'display: block')]");
+        public By ResultPopup     = By.XPath("//*[@class='ui-dropdown-content popup-content view'][contains(@style,'display: block')]");
         public By ScorelineResult = By.ClassName("mode-of-scoreline");
         public By SelectionResult = By.ClassName("mode-of-selection");
         public By VoidResult      = By.ClassName("void-reason");

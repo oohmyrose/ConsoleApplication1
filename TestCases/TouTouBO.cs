@@ -65,13 +65,13 @@ namespace ConsoleApplication1.TestCases
             driver.SwitchTo().Frame(driver.FindElement(By.XPath("//*[@id='MainFrame']")));
             driver.SwitchTo().Frame(driver.FindElement(By.XPath("//*[@id='someMember']")));
             driver.SwitchTo().Frame(driver.FindElement(By.XPath("//*[@id='imageUploadFrame']")));
-            ElementVerify.IsElementExists(driver, By.Id("txtDateFrom"));
+            ElementVerify.Wait(driver, By.Id("txtDateFrom"));
 
             //Click on calendar icon
             driver.FindElement(By.Id("txtDateFrom")).ClickOnIt("Event Date From");
 
             //Find the calendar
-            ElementVerify.IsElementExists(driver, By.Id("ui-datepicker-div"));
+            ElementVerify.Wait(driver, By.Id("ui-datepicker-div"));
             ICollection<IWebElement> columns = driver.FindElement(By.Id("ui-datepicker-div")).FindElements(By.TagName("td"));
 
             //Click on the number if cell = today's date-2
@@ -85,7 +85,7 @@ namespace ConsoleApplication1.TestCases
             }
 
             //Wager No Textbox
-            ElementVerify.IsElementExists(driver, By.Id("txtWagerNo"));
+            ElementVerify.Wait(driver, By.Id("txtWagerNo"));
 
             #region (4) Fetch All Bet Number from TouTou
 
@@ -97,7 +97,7 @@ namespace ConsoleApplication1.TestCases
                 Thread.Sleep(2000);
                 driver.FindElement(By.Id("txtWagerNo")).EnterText("Wager No.", wager);
                 driver.FindElement(By.Id("btnSearch")).ClickOnIt("Search");
-                ElementVerify.IsElementExists(driver, By.ClassName("acct-no"));
+                ElementVerify.Wait(driver, By.ClassName("acct-no"));
                 if (wager == driver.FindElement(By.ClassName("acct-no")).Text)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;

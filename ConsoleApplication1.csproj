@@ -50,6 +50,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\Console_Extensions.cs" />
     <Compile Include="Extensions\Element_Extensions.cs" />
     <Compile Include="PageObjects\GMM_Objects.cs" />
     <Compile Include="Program.cs" />

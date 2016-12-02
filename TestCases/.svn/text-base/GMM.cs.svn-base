@@ -2,8 +2,6 @@
 using ConsoleApplication1.PageObjects;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -22,52 +20,66 @@ namespace ConsoleApplication1.TestCases
         public const string gametype = "Inning";
         public static string eventid = String.Empty;
 
-        public static void Login(Enviromment environment)
+        public static void Login(TheEnvironment environment)
         {
             string URL = String.Empty;
-            string username = String.Empty;  //System.Configuration.ConfigurationManager.AppSettings["gmmUser"];
-            string password = String.Empty; // System.Configuration.ConfigurationManager.AppSettings["gmmPwd"];
+            string username = String.Empty;
+            string password = String.Empty;
             var gmmLogin = new GMMLogin(driver);
 
-
+            // Assign URL/user/pwd based on environment 
             switch (environment)
             {
-                case Enviromment.QAT:
+                case TheEnvironment.QAT:
                     URL = System.Configuration.ConfigurationManager.AppSettings["qatGMMURL"];
                     username = System.Configuration.ConfigurationManager.AppSettings["qatGMMUser"];
                     password = System.Configuration.ConfigurationManager.AppSettings["qatGMMPwd"];
                     break;
-                case Enviromment.UAT:
+                case TheEnvironment.UAT:
                     URL = System.Configuration.ConfigurationManager.AppSettings["uatGMMURL"];
                     username = System.Configuration.ConfigurationManager.AppSettings["uatGMMUser"];
                     password = System.Configuration.ConfigurationManager.AppSettings["uatGMMPwd"];
                     break;
+                
             }
            
-
             driver.Manage().Window.Maximize();
             driver.Url = URL + "Login.aspx";
-            gmmLogin.UserName.EnterText("GMM Login User", username);
-            gmmLogin.Password.EnterText("GMM Login Password", password);
+            gmmLogin.UserName.EnterText("GMM Login User Textbox", username);
+            gmmLogin.Password.EnterText("GMM Login Password Textbox", password);
             gmmLogin.Submit.ClickOnIt("GMM Login Button");
+
+
+            if (ElementVerify.Wait(driver, gmmLogin.SiteMenuAfterLogin) != null)
+            {
+                WriteConsole.Green("You successfully Login to GMM");
+            }
+            else
+            {
+                WriteConsole.Red(String.Format(ElementVerify.Wait(driver, gmmLogin.LoginErrorMessage).Text));
+                WriteConsole.Green("Suggested Solution: You can go to GMM Server, and restart DNS Client Sevice");
+                throw new Exception("GMM Login Failed");
+            }
+
+
         }
              
-        public static void CreateEvent()
+        public static string CreateEvent()
         {
             DateTime inplaytime = DateTime.Now.AddHours(-14);         //2 hours before NOW  ---- Local(GMT+8),Server(GMT-4)
-   
+ 
             #region (1) Go to EventCreate Page
             //Nabigate Menu
             var gmmMenu = new GMMMenu(driver);
             var gmmCreateEvent = new GMMCreateEvent(driver);
             gmmMenu.Sportsbook.ClickOnIt("Sportsbook");                                       
-            ElementVerify.IsElementExists(driver, By.LinkText("Event"));
+            ElementVerify.Wait(driver, By.LinkText("Event"));
             gmmMenu.Event.MouseOver(driver, "Event");                                          
-            ElementVerify.IsElementExists(driver, By.LinkText("Fixture Event"));
+            ElementVerify.Wait(driver, By.LinkText("Fixture Event"));
             gmmMenu.FixtureEvent.ClickOnIt("Fixture Event"); 
             
             //Click on Create                    
-            ElementVerify.IsElementExists(driver, By.LinkText("Create"));
+            ElementVerify.Wait(driver, By.LinkText("Create"));
             gmmCreateEvent.Create.ClickOnIt("Button_Create"); 
             #endregion
 
@@ -112,35 +124,32 @@ namespace ConsoleApplication1.TestCases
             }
             #endregion
 
-            #region (9) Save
+            #region (9) Save and Get Eevnt ID
             wait.Until(ExpectedConditions.ElementExists(By.LinkText("Save")));
-            driver.FindElement(By.LinkText("Save")).ClickOnIt("Button_Save"); 
+            driver.FindElement(By.LinkText("Save")).ClickOnIt("Button_Save");
+            ElementVerify.Wait(driver, gmmCreateEvent.ParentEventId);
+            eventid = driver.FindElement(gmmCreateEvent.ParentEventId).GetAttribute("Value").Trim();
             #endregion
 
-            #region (10) Get Eevnt ID (wait for Oakley to update GMM code)
-            //Get Event ID
-            #endregion
-
-            #region (11) Verify succeed or not
+            #region (10) Verify succeed or not
             //Verify succeed or not
-            try
+            if (ElementVerify.Wait(driver, By.ClassName("savesuccess")) != null)
             {
-                wait.Until(ExpectedConditions.ElementExists(By.ClassName("savesuccess")));
-                Console.WriteLine(String.Format("Create Event Successfully"));          
+                Console.WriteLine(String.Format("Create Event Successfully"));
+                Console.WriteLine(String.Format("Event id : {0} ({1})", eventid, sport));
+                return eventid;
             }
-            catch(NoSuchElementException)
-            {
-                Console.WriteLine(String.Format("Create Event Fail"));
+            else {
+                throw new Exception("GMM CreateEvent Failed");
             }
             #endregion
 
-            #region (12) Sleep
+            #region (11) Sleep
             Thread.Sleep(2000);
             #endregion
-
         }
 
-        public static string GoToMMPage()
+        public static void GoToMMPage(string eventid)
         {
 
             #region (1) Go to MM Page
@@ -179,11 +188,12 @@ namespace ConsoleApplication1.TestCases
             driver.FindElement(By.Id("SearchBarEventCriteriaButton")).ClickOnIt("Event Filter");
             wait.Until(ExpectedConditions.ElementExists(By.Id("eventCriteriaSelectAll"))); 
             // Get Event ID
-            eventid = driver.FindElement(By.XPath("//label[contains(text() , '" + home + " vs " + away + "')]")).GetAttribute("for");
+            //eventid = driver.FindElement(By.XPath("//label[contains(text() , '" + home + " vs " + away + "')]")).GetAttribute("for");
             // Enter Event ID in textbox, then submit
             driver.FindElement(By.Id("eventSearchTextBox")).EnterText("EventID Textbox", eventid);
             driver.FindElement(By.XPath("//label[contains(text() , 'Select All Events')]")).ClickOnIt("Deselect All");
-            driver.FindElement(By.XPath("//label[contains(text() , '" + home + " vs " + away + "')]")).ClickOnIt("Event Name");
+            driver.FindElement(By.Id("" + eventid + "")).ClickOnIt("Filter one event we created");
+            //driver.FindElement(By.XPath("//label[contains(text() , '" + home + " vs " + away + "')]")).ClickOnIt("Event Name");
             driver.FindElement(By.Id("EventCriteriaSubmit")).ClickOnIt("Confirm Event"); 
             #endregion
 
@@ -203,7 +213,6 @@ namespace ConsoleApplication1.TestCases
             wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("SearchBarSearchButton")));
             driver.FindElement(By.Id("SearchBarSearchButton")).ClickOnIt("SearchEvent");
             Console.WriteLine(String.Format("Event id : {0} ({1})", eventid, sport));
-            return eventid; 
             #endregion
  
         }
@@ -349,9 +358,9 @@ namespace ConsoleApplication1.TestCases
 
             #region (1) Go to Result Process & Settlemenet Page
             driver.FindElement(By.LinkText("Result Process & Settlement")).ClickOnIt("Result Process & Settlement");
-            if (ElementVerify.IsElementExists(driver, By.LinkText("Result Process")) != null)
+            if (ElementVerify.Wait(driver, By.LinkText("Result Process")) != null)
                 driver.FindElement(By.LinkText("Result Process")).MouseOver(driver, "Result Process");
-            if (ElementVerify.IsElementExists(driver, By.XPath("//a[contains(@href,'/DSA/ResultProcessing/ResultProcessing.aspx')]")) != null)
+            if (ElementVerify.Wait(driver, By.XPath("//a[contains(@href,'/DSA/ResultProcessing/ResultProcessing.aspx')]")) != null)
             {
                 driver.FindElement(By.XPath("//a[contains(@href,'/DSA/ResultProcessing/ResultProcessing.aspx')]")).MouseOver(driver, "Sub Result Process");
                 driver.FindElement(By.XPath("//a[contains(@href,'/DSA/ResultProcessing/ResultProcessing.aspx')]")).ClickOnIt("Result Process Page");
@@ -359,18 +368,18 @@ namespace ConsoleApplication1.TestCases
             #endregion
 
             #region (2) Event ID
-            if (ElementVerify.IsElementExists(driver, settlementPage.EventId) != null)
+            if (ElementVerify.Wait(driver, settlementPage.EventId) != null)
                 driver.FindElement(settlementPage.EventId).EnterText("Event ID", eventid);
             #endregion
 
             #region (3) Pick Event Date From
-            if (ElementVerify.IsElementExists(driver, By.Id("txtFromDate")) != null)
+            if (ElementVerify.Wait(driver, By.Id("txtFromDate")) != null)
             {
                 //Click on calendar icon
                 settlementPage.StartDate.ClickOnIt("Event Date From");
 
                 //Find the calendar
-                ElementVerify.IsElementExists(driver, By.ClassName("ui-datepicker-calendar"));
+                ElementVerify.Wait(driver, By.ClassName("ui-datepicker-calendar"));
                 ICollection<IWebElement> columns = settlementPage.CalendarPicker.FindElements(By.TagName("td"));
 
                 //Click on the number if cell = today's date-2
@@ -386,15 +395,15 @@ namespace ConsoleApplication1.TestCases
             #endregion
 
             #region (4) Search the event
-            if (ElementVerify.IsElementExists(driver, By.Id("btnSubmit")) != null)
+            if (ElementVerify.Wait(driver, By.Id("btnSubmit")) != null)
                 settlementPage.SearchButton.ClickOnIt("Search");
             #endregion
 
             #region (5) Find number of market actions item
             // Wait until loading complete
-            ElementVerify.IsElementExists(driver, settlementPage.LoadingBar);
+            ElementVerify.Wait(driver, settlementPage.LoadingBar);
             // Wait for the event
-            ElementVerify.IsElementExists(driver, settlementPage.RefreshButton);
+            ElementVerify.Wait(driver, settlementPage.RefreshButton);
             // Count items
             ICollection<IWebElement> marketItems = driver.FindElements(settlementPage.MarketLine);
             Console.WriteLine(String.Format("Number of market line : {0}", marketItems.Count));
@@ -417,14 +426,14 @@ namespace ConsoleApplication1.TestCases
                     //Click on Action Button
                     driver.FindElement(By.XPath("//*[@id='" + marketlist[i] + "']/span[2]")).ClickOnIt("Marketline Action");
                     Thread.Sleep(2000);
-                    ElementVerify.IsElementExists(driver, settlementPage.ActionDropdown);
+                    ElementVerify.Wait(driver, settlementPage.ActionDropdown);
                     driver.FindElement(By.LinkText("Enter Result")).ClickOnIt("Enter Result");
-                    ElementVerify.IsElementExists(driver, settlementPage.ScorePopup);
+                    ElementVerify.Wait(driver, settlementPage.ResultPopup);
 
-                    //Key Result
+                    //Key Result for scoreline
                     if (driver.FindElement(settlementPage.ScorelineResult).Displayed)
                     {
-                        ElementVerify.IsElementExists(driver, settlementPage.ScoreHome);
+                        ElementVerify.Wait(driver, settlementPage.ScoreHome);
                         driver.FindElement(settlementPage.ScoreHome).EnterText("Score Home", "2");
                         driver.FindElement(settlementPage.ScoreAway).EnterText("Score Away", "0");
                         Thread.Sleep(2000);
@@ -435,27 +444,26 @@ namespace ConsoleApplication1.TestCases
                         alert = driver.SwitchTo().Alert();
                         alert.Accept();
                     }
-                    else if (driver.FindElement(settlementPage.SelectionResult).Displayed)
+                    else if (driver.FindElement(By.XPath("//*[@id='" + marketlist[i] + "']/span[2]/ul[2]/li/table[2]")).Displayed) //Key Result for SPWOS
                     {
-                        ElementVerify.IsElementExists(driver, settlementPage.WinSelection);
-                        driver.FindElement(settlementPage.WinSelection).ClickOnIt("Win Selection");
-                        driver.FindElement(settlementPage.WinSelection).SelectByText("Result Option","WIN");
-                        //driver.FindElement(By.XPath("//option[text()='WIN']")).MouseOver(driver,"WIN");
-                        //driver.FindElement(By.XPath("//option[text()='WIN']")).ClickOnIt("WIN");
+                        ElementVerify.Wait(driver, By.XPath("//*[@id='" + marketlist[i] + "']/span[2]/ul[2]/li/table[2]/tbody/tr/td[2]/select"));
                         Thread.Sleep(2000);
-                        //driver.FindElement(settlementPage.WinSelection).ClickOnIt("Win Selection");
+                        driver.FindElement(By.XPath("//*[@id='" + marketlist[i] + "']/span[2]/ul[2]/li/table[2]/tbody/tr/td[2]/select")).ClickOnIt("Win Selection");
+                        driver.FindElement(By.XPath("//*[@id='" + marketlist[i] + "']/span[2]/ul[2]/li/table[2]/tbody/tr/td[2]/select")).SelectByText("Result Option","WIN");
+                        Thread.Sleep(2000);
                         driver.FindElement(settlementPage.SaveButtonProp).MouseOverThenClick(driver, "Save");
-                        //driver.FindElement(settlementPage.SettleButton).Click();
-                        //var aa = driver.FindElements(settlementPage.SettleButton);
+
                         // Alert message
+                        //Thread.Sleep(2000);
                         wait.Until(ExpectedConditions.AlertIsPresent());
                         alert = driver.SwitchTo().Alert();
                         alert.Accept();
+                        Thread.Sleep(2000);
                     }
                 }
                 else 
                 {
-                    Console.WriteLine("This marketline has result already");
+                    Console.WriteLine("This marketline has resulted already");
                 }
             }
             #endregion
@@ -464,7 +472,7 @@ namespace ConsoleApplication1.TestCases
             #endregion
 
             #region (8) Settle All BU
-            ElementVerify.IsElementExists(driver, settlementPage.CheckAll);
+            ElementVerify.Wait(driver, settlementPage.CheckAll);
             driver.FindElement(settlementPage.CheckAll).ClickOnIt("Check All BU");
             driver.FindElement(settlementPage.SettleButton).ClickOnIt("Do Settlement");
             // Alert message (Confirm do Settlement?)
@@ -501,7 +509,7 @@ namespace ConsoleApplication1.TestCases
             #region (1) Access Wager Enquiry
             var gmmMenu = new GMMMenu(driver);
             driver.FindElement(gmmMenu.Report).ClickOnIt("Report");
-            ElementVerify.IsElementExists(driver, gmmMenu.WagerEnquiry);
+            ElementVerify.Wait(driver, gmmMenu.WagerEnquiry);
             driver.FindElement(gmmMenu.WagerEnquiry).ClickOnIt("Wager Enquiry");
             #endregion
 
@@ -510,19 +518,19 @@ namespace ConsoleApplication1.TestCases
             driver.SwitchTo().Frame(driver.FindElement(By.TagName("iframe")));
             //Select Wager No.
             var wagerEnquiry = new WagerEnquiry(driver);
-            ElementVerify.IsElementExists(driver, wagerEnquiry.UserWagerOption);
+            ElementVerify.Wait(driver, wagerEnquiry.UserWagerOption);
             driver.FindElement(wagerEnquiry.UserWagerOption).ClickOnIt("User Code or Wager No.");
             driver.FindElement(wagerEnquiry.UserWagerOption).SelectByText("select wager no", "Wager No.");
             #endregion
 
             #region (3) Pick Event Date From
-            if (ElementVerify.IsElementExists(driver, wagerEnquiry.StartDate) != null)
+            if (ElementVerify.Wait(driver, wagerEnquiry.StartDate) != null)
             {
                 //Click on calendar icon
                 driver.FindElement(wagerEnquiry.StartDate).ClickOnIt("Event Date From");
 
                 //Find the calendar
-                ElementVerify.IsElementExists(driver, wagerEnquiry.CalendarPicker);
+                ElementVerify.Wait(driver, wagerEnquiry.CalendarPicker);
                 ICollection<IWebElement> columns = driver.FindElement(wagerEnquiry.CalendarPicker).FindElements(By.TagName("td"));
 
                 //Click on the number if cell = today's date-2
@@ -538,28 +546,25 @@ namespace ConsoleApplication1.TestCases
             #endregion
 
             #region (4) Fetch All Bet Number from TouTou
-
+            
             char[] delimiterChars = {','};
-            BetNo = BetNo.Remove(BetNo.Length - 1);        // Reomove comma
+            BetNo = BetNo.Remove(BetNo.Length - 1);        // Reomove the last comma (,)
             string[] wagers = BetNo.Split(delimiterChars);
             foreach (string wager in wagers)
             {
+                // Key in wager number in textbox
                 Thread.Sleep(2000);
                 driver.FindElement(wagerEnquiry.UserWagerValue).EnterText("Wager No.", wager);
                 driver.FindElement(wagerEnquiry.SearchButton).ClickOnIt("Search");
-                ElementVerify.IsElementExists(driver,wagerEnquiry.WagerToVerify);
+                
+                // Wait for data displayed, then fetch wager number
+                if (ElementVerify.Wait(driver, wagerEnquiry.WagerToVerify) == null)
+                    continue;
+               
                 if (wager == driver.FindElement(wagerEnquiry.WagerToVerify).Text)
-                {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("Wager Verified");
-                    Console.ResetColor();
-                }
+                    WriteConsole.Green("Wager Verified");
                 else
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Unable to find the wager");
-                    Console.ResetColor();
-                }
+                    WriteConsole.DarkRed("Unable to find the wager");
             }
 
             #endregion
@@ -568,7 +573,7 @@ namespace ConsoleApplication1.TestCases
 
     }
 
-    public enum Enviromment
+    public enum TheEnvironment
     {
         QAT,
         UAT
