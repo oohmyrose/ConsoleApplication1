@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 94
-/QCC/!svn/ver/398/QA/TrainingLab/Team2/Marie/ConsoleApplication1/ConsoleApplication1/TestCases
+/QCC/!svn/ver/423/QA/TrainingLab/Team2/Marie/ConsoleApplication1/ConsoleApplication1/TestCases
 END
 STAR3.cs
 K 25
@@ -19,17 +19,23 @@ GMM.cs
 K 25
 svn:wc:ra_dav:version-url
 V 101
-/QCC/!svn/ver/405/QA/TrainingLab/Team2/Marie/ConsoleApplication1/ConsoleApplication1/TestCases/GMM.cs
+/QCC/!svn/ver/426/QA/TrainingLab/Team2/Marie/ConsoleApplication1/ConsoleApplication1/TestCases/GMM.cs
 END
 TouTouBO.cs
 K 25
 svn:wc:ra_dav:version-url
 V 106
-/QCC/!svn/ver/403/QA/TrainingLab/Team2/Marie/ConsoleApplication1/ConsoleApplication1/TestCases/TouTouBO.cs
+/QCC/!svn/ver/409/QA/TrainingLab/Team2/Marie/ConsoleApplication1/ConsoleApplication1/TestCases/TouTouBO.cs
 END
 iOWB.cs
 K 25
 svn:wc:ra_dav:version-url
 V 102
 /QCC/!svn/ver/276/QA/TrainingLab/Team2/Marie/ConsoleApplication1/ConsoleApplication1/TestCases/iOWB.cs
+END
+WL.cs
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/QCC/!svn/ver/426/QA/TrainingLab/Team2/Marie/ConsoleApplication1/ConsoleApplication1/TestCases/WL.cs
 END

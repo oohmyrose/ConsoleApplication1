@@ -10,3 +10,4 @@ D:\1│Document\SVN\QCC\Team2\Marie\ConsoleApplication1\ConsoleApplication1\bin\
 D:\1│Document\SVN\QCC\Team2\Marie\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
 D:\1│Document\SVN\QCC\Team2\Marie\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
 D:\1│Document\SVN\QCC\Team2\Marie\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
+D:\1│Document\SVN\QCC\Team2\Marie\ConsoleApplication1\ConsoleApplication1\bin\Debug\RelevantCodes.ExtentReports.dll

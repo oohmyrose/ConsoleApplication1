@@ -1,14 +1,14 @@
 10
 
 dir
-402
+423
 http://tpmwandisco.xuenn.com/QCC/QA/TrainingLab/Team2/Marie/ConsoleApplication1/ConsoleApplication1/TestCases
 http://tpmwandisco.xuenn.com/QCC
 
 
 
-2016-11-29T17:00:06.510758Z
-398
+2016-12-14T02:36:26.625812Z
+423
 marie.yeh
 
 
@@ -62,7 +62,7 @@ marie.yeh
 
 TouTou.cs
 file
-403
+
 
 
 
@@ -96,14 +96,14 @@ marie.yeh
 
 GMM.cs
 file
-405
+426
 
 
 
-2016-12-02T06:01:45.409355Z
-e40027c4845e35be958d4e61b26d0fa6
-2016-12-02T06:07:06.888269Z
-405
+2016-12-19T01:59:10.614993Z
+060a2dc1e0b251bafc4df0ab15d04da1
+2016-12-19T02:07:28.051636Z
+426
 marie.yeh
 
 
@@ -126,18 +126,18 @@ marie.yeh
 
 
 
-28796
+29112
 
 TouTouBO.cs
 file
-403
 
 
 
-2016-12-01T08:02:38.310230Z
-724a878f507682b1efd0286a6fa9b241
-2016-12-02T05:46:10.652552Z
-403
+
+2016-12-04T04:36:47.067850Z
+08603fc3cc4dc26415e2a8f79609b8cc
+2016-12-05T01:59:43.205707Z
+409
 marie.yeh
 
 
@@ -160,7 +160,7 @@ marie.yeh
 
 
 
-4720
+4724
 
 iOWB.cs
 file
@@ -195,4 +195,38 @@ marie.yeh
 
 
 3159
+
+WL.cs
+file
+426
+
+
+
+2016-12-14T10:43:35.416415Z
+922f284b09e4c239e20aef1bb6c808a0
+2016-12-19T02:07:28.051636Z
+426
+marie.yeh
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+6230
 

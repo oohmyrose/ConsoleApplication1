@@ -1,14 +1,14 @@
 10
 
 dir
-402
+423
 http://tpmwandisco.xuenn.com/QCC/QA/TrainingLab/Team2/Marie/ConsoleApplication1/ConsoleApplication1
 http://tpmwandisco.xuenn.com/QCC
 
 
 
-2016-11-30T04:26:17.683618Z
-402
+2016-12-14T02:36:26.625812Z
+423
 marie.yeh
 has-props
 
@@ -31,48 +31,14 @@ dir
 
 packages.config
 file
+426
 
 
 
-
-2016-11-30T04:35:53.834504Z
-e5114d65b82aacdcc12ed91071aca92b
-2016-11-19T08:32:08.076354Z
-280
-marie.yeh
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-298
-
-ConsoleApplication1.csproj.user
-file
-404
-
-
-
-2016-12-02T05:46:37.772864Z
-81b27996802cf21fc15f60b282c21a9e
-2016-12-02T05:49:45.759302Z
-404
+2016-12-18T07:30:36.937874Z
+f4cf108a52031646178ff0b023383387
+2016-12-19T02:07:28.051636Z
+426
 marie.yeh
 
 
@@ -97,16 +63,16 @@ marie.yeh
 
 373
 
-App.config
+ConsoleApplication1.csproj.user
 file
-405
 
 
 
-2016-12-02T06:05:12.910847Z
-764608111d276460cf9ab474ebfefd16
-2016-12-02T06:07:06.888269Z
-405
+
+2016-12-03T15:12:40.042787Z
+dfe88056fcb0317bac96f2f15ba6b3fb
+2016-12-05T01:59:43.205707Z
+409
 marie.yeh
 
 
@@ -129,21 +95,55 @@ marie.yeh
 
 
 
-560
+369
+
+App.config
+file
+426
+
+
+
+2016-12-18T13:03:57.331235Z
+c7502c27412d84db0d93fcff93a8210c
+2016-12-19T02:07:28.051636Z
+426
+marie.yeh
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1126
 
 PageObjects
 dir
 
 ConsoleApplication1.csproj
 file
-403
+426
 
 
 
-2016-12-01T14:54:58.782096Z
-26526d5ad1f0565a2b3a4bc59bf30ab5
-2016-12-02T05:46:10.652552Z
-403
+2016-12-18T10:07:01.522998Z
+e55cf785f08bdb542e82747c8836e250
+2016-12-19T02:07:28.051636Z
+426
 marie.yeh
 
 
@@ -166,41 +166,7 @@ marie.yeh
 
 
 
-3775
-
-ProgramM.cs
-file
-
-
-
-delete
-2016-11-30T04:35:53.849006Z
-62f36dcc3751563d6615823763b956a0
-2016-11-11T07:35:28.752721Z
-234
-marie.yeh
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1852
+4141
 
 chromedriver.exe
 file
@@ -238,14 +204,14 @@ has-props
 
 Program.cs
 file
-408
+426
 
 
 
-2016-12-02T06:22:30.050734Z
-0ba9d9737d5974366295f926566e0d1b
-2016-12-02T06:28:44.113157Z
-408
+2016-12-19T01:59:50.483993Z
+658bcc0fe2303cf96a32b5f9f0992e9d
+2016-12-19T02:07:28.051636Z
+426
 marie.yeh
 
 
@@ -268,7 +234,7 @@ marie.yeh
 
 
 
-1967
+3156
 
 Properties
 dir

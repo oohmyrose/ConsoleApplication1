@@ -28,17 +28,13 @@ namespace ConsoleApplication1.PageObjects
 
     public class GMMMenu
     {
-        [FindsBy(How = How.LinkText, Using = "Sportsbook")]
-        public IWebElement Sportsbook { get; set; }
-
-        [FindsBy(How = How.LinkText, Using = "Event")]
-        public IWebElement Event { get; set; }
-
-        [FindsBy(How = How.LinkText, Using = "Fixture Event")]
-        public IWebElement FixtureEvent { get; set; }
-
-        public By Report       = By.LinkText("Report");
-        public By WagerEnquiry = By.LinkText("Wager Enquiry");
+        public By Sportsbook             = By.LinkText("Sportsbook");
+        public By Event                  = By.LinkText("Event");
+        public By FixtureEvent           = By.LinkText("Fixture Event");
+        public By MarketManagement       = By.LinkText("Market Management");
+        public By MarketManagementNormal = By.LinkText("Market Management (Normal)");
+        public By Report                 = By.LinkText("Report");
+        public By WagerEnquiry           = By.LinkText("Wager Enquiry");
         
 
         public GMMMenu(IWebDriver driver) {
@@ -46,19 +42,65 @@ namespace ConsoleApplication1.PageObjects
         }
  
     }
-
     public class GMMCreateEvent
     {
-        [FindsBy(How = How.LinkText, Using = "Create")]
-        public IWebElement Create { get; set; }
-
-        public By ParentEventId    = By.Id("mainContent_EventId");
+        public By Create              = By.LinkText("Create");
+        public By SportDropdown       = By.Id("mainContent_SportDropDownList");
+        public By CompetitionDropdown = By.Id("mainContent_CompetitionDropDownList");
+        public By HomeDropdown        = By.Id("mainContent_HomeRunnerDropDownList");
+        public By AwayDropdown        = By.Id("mainContent_AwayRunnerDropDownList");
+        public By ParentEventId       = By.Id("mainContent_EventId");
+        public By InPlayCheckbox      = By.Id("mainContent_InPlayCheckBox");
+        public By EventDatePicker     = By.Id("mainContent_EventDatePicker");
+        public By EventHourDropdown   = By.Id("mainContent_EventDateHourDropDown");
+        public By EventMinuteDropdown = By.Id("mainContent_EventDateMinuteDropDown");
+        public By GroundTypeDropdown  = By.Id("mainContent_GroundTypeDropDownList");
+        public By GameTypeDropdown    = By.Id("mainContent_periodTypeDdl");
+        public By SaveButton          = By.LinkText("Save");
+        public By CreateFailMsg       = By.XPath("//*[@id='errMsg'][@style='color: Red']");
+        public By CreateProgress      = By.XPath("//*[@id='progress'][@style='display: none']");
+        public By CreateSuccessMsg    = By.ClassName("savesuccess");
 
         public GMMCreateEvent(IWebDriver driver) {
             PageFactory.InitElements(driver, this);
         }
     }
+    public class GMMMMPage
+    {
+        public By Create              = By.LinkText("Create");
+        public By ParentEventId       = By.Id("mainContent_EventId");
+        public By SportCriteria       = By.Id("SearchBarSportCriteriaButton");
+        public By SportPopup          = By.XPath("//*[@id='simple-popup-box'][contains(@style,'display: block')]");
+        public By SportList           = By.Id("sportCriteria");
+        public By SportSubmit         = By.Id("sportCriteriaSubmit");
+        public By OddsPageInPlay      = By.CssSelector("#SearchBarOddsPageComboBox > option[value='All Market (In Play)']");
+        public By OddsPageDropdown    = By.Id("SearchBarOddsPageComboBox");
+        public By CompetitionCriteria = By.Id("SearchBarCompetitionCriteriaButton");
+        public By ComptitionSelectAll = By.Id("compCriteriaSelectAll");
+        public By CompetitionSubmit   = By.Id("CompetetionCriteriaSubmit");
+        public By EventCriteria       = By.Id("SearchBarEventCriteriaButton");
+        public By EventSelectAll      = By.Id("eventCriteriaSelectAll");
+        public By EventTextbox        = By.Id("eventSearchTextBox");
+        public By EventSubmit         = By.Id("EventCriteriaSubmit");
+        public By SearchButton        = By.Id("SearchBarSearchButton");
 
+        public By NoHandicapOdds      = By.XPath("//*[@class='oddUpdateInput']");
+        public By OEOdds              = By.XPath("//*[@class='oddUpdateInput']");
+        public By HandicapOdds        = By.XPath("//*[@class='formInput']");
+        public By HandicapDropdown    = By.XPath("//*[@class='formInputDrop']");
+        public By HandicapTextbox     = By.XPath("//*[@class='formInput ac_input']");
+        public By OddsSaveButton      = By.Id("saveButton");
+        public By OddsPopupBox        = By.XPath("//*[@id='simple-popup-box'][contains(@style,'display: block')]");
+
+        public By OpenMarketline = By.Id("openCurrentPageMlButton");
+
+
+
+        public GMMMMPage(IWebDriver driver)
+        {
+            PageFactory.InitElements(driver, this);
+        }
+    }
     public class SettlementPage
     {
       

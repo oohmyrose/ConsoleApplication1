@@ -4,6 +4,6 @@
     <ProjectView>ShowAllFiles</ProjectView>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <StartArguments>QAT UAT</StartArguments>
+    <StartArguments>UAT</StartArguments>
   </PropertyGroup>
 </Project>

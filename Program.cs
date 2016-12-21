@@ -2,6 +2,8 @@
 using ConsoleApplication1.Extensions;
 using System;
 using System.Windows.Input;
+using OpenQA.Selenium;
+using RelevantCodes.ExtentReports;
 
 namespace ConsoleApplication1
 {
@@ -9,46 +11,68 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
-            TheEnvironment envi;
+            //TheEnvironment envi;
 
             for (int i = 0; i < args.Length; i++)
             {
                 try
                 {
-                    Enum.TryParse(args[i], out envi);
-                    GMM.Login(envi);
+                    //Enum.TryParse(args[i], out envi);
+                    //GMM.Login(envi);
+                    GMM.Login(TheEnvironment.UAT);
                     string eventid = GMM.CreateEvent();
                     GMM.GoToMMPage(eventid);
-                    GMM.UpdateOdds();
-                    GMM.OpenMarket();
+                    GMM.UpdateOdds(eventid);
+                    GMM.OpenMarket(eventid);
 
 
-                    TouTou.MemberSite.Login();
-                    string BetNo = TouTou.MemberSite.PlaceBet(eventid).Trim();
+                    //TouTou.MemberSite.Login();
+                    //string BetNo = TouTou.MemberSite.PlaceBet(eventid).Trim();
 
 
-                    TTBO.TTBOLogin();
-                    TTBO.FindMember();
-                    TTBO.FindWager(BetNo);
+                    //TTBO.TTBOLogin();
+                    //TTBO.FindMember();
+                    //TTBO.FindWager(BetNo);
 
-                    GMM.KeepEvent();
+                    GMM.KeepEvent(eventid);
                     GMM.ResultAndSettleEvent(eventid);
-                    GMM.CheckReport(BetNo);
 
+                    //GMM.CheckReport(BetNo);
 
-                    WriteConsole.Green("Automation has succeeded");
+                    //WL.Main(TheEnvironment.UAT);
                 }
                 catch (Exception e)
                 {
-                    WriteConsole.Red(String.Format("Automation has failed : {0} ", e.Message.ToString()));
+                    WriteConsole.Red(String.Format("Exception has happened : {0} ", e.Message.ToString()));
 
                     switch (e.Message)
                     {
                         case "GMM Login Failed":
-                            // Excute other test cases       
+                            Report.Log(LogStatus.Fail, "Login GMM", e.Message);   
                             break;
                         case "GMM CreateEvent Failed":
-                            // 
+                            break;
+                        case "GMM GoToMMPage Failed":
+                            break;
+                        case "GMM UpdateOdds Failed":
+                            break;
+                        case "GMM OpenMarket Failed":
+                            break;
+                        case "GMM KeepEvent Failed":
+                            break;
+                        case "GMM ResultAndSettleEvent Failed":
+                            break;
+                        case "GMM CheckReport Failed":
+                            break;
+                        case "Toutou Login Failed":
+                            break;
+                        case "Toutou PlaceBet Failed":
+                            break;
+                        case "TTBO Login Failed":
+                            break;
+                        case "TTBO FindMember Failed":
+                            break;
+                        case "TTBO FindWager Failed":
                             break;
                         default:
                             break;
@@ -56,7 +80,8 @@ namespace ConsoleApplication1
                 }
                 finally
                 {
-                    WriteConsole.Yellow("Test Automation Completed");
+                    WriteConsole.Yellow("Test Automation Completed");              
+                    Report.EndAutomation();
                 }
             }
  
