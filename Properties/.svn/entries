@@ -1,14 +1,14 @@
 10
 
 dir
-423
-http://tpmwandisco.xuenn.com/QCC/QA/TrainingLab/Team2/Marie/ConsoleApplication1/ConsoleApplication1/Properties
-http://tpmwandisco.xuenn.com/QCC
+103865
+http://tpmwandisco.xuenn.com/SBK/QA/ConsoleApplication1/ConsoleApplication1/Properties
+http://tpmwandisco.xuenn.com/SBK
 
 
 
-2016-11-11T07:35:28.752721Z
-234
+2016-12-21T06:23:24.729450Z
+103527
 marie.yeh
 
 
@@ -24,7 +24,7 @@ marie.yeh
 
 
 
-8ed5f638-f978-4405-a05c-9aace43790d0
+a3239d23-2500-45d3-bca8-4aa5c85cff78
 
 AssemblyInfo.cs
 file
@@ -32,10 +32,10 @@ file
 
 
 
-2016-11-30T04:35:53.705478Z
+2016-12-23T09:58:00.482066Z
 048b7952f4d99739f0f4ff62c1054238
-2016-11-11T07:35:28.752721Z
-234
+2016-12-21T06:23:24.729450Z
+103527
 marie.yeh
 
 

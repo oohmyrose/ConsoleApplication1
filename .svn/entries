@@ -1,16 +1,15 @@
 10
 
 dir
-423
-http://tpmwandisco.xuenn.com/QCC/QA/TrainingLab/Team2/Marie/ConsoleApplication1/ConsoleApplication1
-http://tpmwandisco.xuenn.com/QCC
+103865
+http://tpmwandisco.xuenn.com/SBK/QA/ConsoleApplication1/ConsoleApplication1
+http://tpmwandisco.xuenn.com/SBK
 
 
 
-2016-12-14T02:36:26.625812Z
-423
+2016-12-21T06:23:24.729450Z
+103527
 marie.yeh
-has-props
 
 
 
@@ -24,21 +23,19 @@ has-props
 
 
 
-8ed5f638-f978-4405-a05c-9aace43790d0
-
-Extensions
-dir
+
+a3239d23-2500-45d3-bca8-4aa5c85cff78
 
 packages.config
 file
-426
 
 
 
-2016-12-18T07:30:36.937874Z
+
+2016-12-23T09:58:11.114129Z
 f4cf108a52031646178ff0b023383387
-2016-12-19T02:07:28.051636Z
-426
+2016-12-21T06:23:24.729450Z
+103527
 marie.yeh
 
 
@@ -69,10 +66,10 @@ file
 
 
 
-2016-12-03T15:12:40.042787Z
+2016-12-23T09:58:11.118129Z
 dfe88056fcb0317bac96f2f15ba6b3fb
-2016-12-05T01:59:43.205707Z
-409
+2016-12-21T06:23:24.729450Z
+103527
 marie.yeh
 
 
@@ -99,14 +96,14 @@ marie.yeh
 
 App.config
 file
-426
 
 
 
-2016-12-18T13:03:57.331235Z
+
+2016-12-23T09:58:11.121130Z
 c7502c27412d84db0d93fcff93a8210c
-2016-12-19T02:07:28.051636Z
-426
+2016-12-21T06:23:24.729450Z
+103527
 marie.yeh
 
 
@@ -134,16 +131,65 @@ marie.yeh
 PageObjects
 dir
 
+Properties
+dir
+
+TestCases
+dir
+
+Extensions
+dir
+
+.git
+dir
+
+Service References
+dir
+
+.gitignore
+file
+
+
+
+
+2016-12-23T09:58:11.128130Z
+73975d9c07c59e39632de46101274101
+2016-12-21T06:23:24.729450Z
+103527
+marie.yeh
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+696
+
 ConsoleApplication1.csproj
 file
-426
 
 
 
-2016-12-18T10:07:01.522998Z
+
+2016-12-23T09:58:11.132131Z
 e55cf785f08bdb542e82747c8836e250
-2016-12-19T02:07:28.051636Z
-426
+2016-12-21T06:23:24.729450Z
+103527
 marie.yeh
 
 
@@ -168,16 +214,53 @@ marie.yeh
 
 4141
 
+.gitattributes
+file
+
+
+
+
+2016-12-23T09:58:11.137131Z
+90d90ea9b5f5dbce1894d4d7e7c8a50c
+2016-12-21T06:23:24.729450Z
+103527
+marie.yeh
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+395
+
+bin
+dir
+
 chromedriver.exe
 file
 
 
 
 
-2016-11-30T04:35:53.878512Z
+2016-12-23T09:58:11.151133Z
 7afec09f6783115727db942623eb21e7
-2016-11-11T07:35:28.752721Z
-234
+2016-12-21T06:23:24.729450Z
+103527
 marie.yeh
 has-props
 
@@ -202,16 +285,19 @@ has-props
 
 7066112
 
+obj
+dir
+
 Program.cs
 file
-426
 
 
 
-2016-12-19T01:59:50.483993Z
+
+2016-12-23T09:58:11.171135Z
 658bcc0fe2303cf96a32b5f9f0992e9d
-2016-12-19T02:07:28.051636Z
-426
+2016-12-21T06:23:24.729450Z
+103527
 marie.yeh
 
 
@@ -235,10 +321,4 @@ marie.yeh
 
 
 3156
-
-Properties
-dir
-
-TestCases
-dir
 

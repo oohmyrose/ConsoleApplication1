@@ -1,14 +1,14 @@
 10
 
 dir
-423
-http://tpmwandisco.xuenn.com/QCC/QA/TrainingLab/Team2/Marie/ConsoleApplication1/ConsoleApplication1/TestCases
-http://tpmwandisco.xuenn.com/QCC
+103865
+http://tpmwandisco.xuenn.com/SBK/QA/ConsoleApplication1/ConsoleApplication1/TestCases
+http://tpmwandisco.xuenn.com/SBK
 
 
 
-2016-12-14T02:36:26.625812Z
-423
+2016-12-21T06:23:24.729450Z
+103527
 marie.yeh
 
 
@@ -24,7 +24,7 @@ marie.yeh
 
 
 
-8ed5f638-f978-4405-a05c-9aace43790d0
+a3239d23-2500-45d3-bca8-4aa5c85cff78
 
 STAR3.cs
 file
@@ -32,10 +32,10 @@ file
 
 
 
-2016-11-30T04:35:53.805998Z
+2016-12-23T09:58:00.569075Z
 da9d2748d1f5d525c8cf59d42e072294
-2016-11-18T11:21:01.725858Z
-276
+2016-12-21T06:23:24.729450Z
+103527
 marie.yeh
 
 
@@ -66,10 +66,10 @@ file
 
 
 
-2016-12-01T12:25:52.693975Z
+2016-12-23T09:58:00.571075Z
 1e9bf4fbee1cacbd5ef7a5d8c2eb7c93
-2016-12-02T05:46:10.652552Z
-403
+2016-12-21T06:23:24.729450Z
+103527
 marie.yeh
 
 
@@ -96,14 +96,14 @@ marie.yeh
 
 GMM.cs
 file
-426
 
 
 
-2016-12-19T01:59:10.614993Z
+
+2016-12-23T09:58:00.574075Z
 060a2dc1e0b251bafc4df0ab15d04da1
-2016-12-19T02:07:28.051636Z
-426
+2016-12-21T06:23:24.729450Z
+103527
 marie.yeh
 
 
@@ -134,10 +134,10 @@ file
 
 
 
-2016-12-04T04:36:47.067850Z
+2016-12-23T09:58:00.577075Z
 08603fc3cc4dc26415e2a8f79609b8cc
-2016-12-05T01:59:43.205707Z
-409
+2016-12-21T06:23:24.729450Z
+103527
 marie.yeh
 
 
@@ -168,10 +168,10 @@ file
 
 
 
-2016-11-30T04:35:53.816000Z
+2016-12-23T09:58:00.580076Z
 e6814a0f6848f1526038d0f7d41dfa94
-2016-11-18T11:21:01.725858Z
-276
+2016-12-21T06:23:24.729450Z
+103527
 marie.yeh
 
 
@@ -198,14 +198,14 @@ marie.yeh
 
 WL.cs
 file
-426
 
 
 
-2016-12-14T10:43:35.416415Z
+
+2016-12-23T09:58:00.582076Z
 922f284b09e4c239e20aef1bb6c808a0
-2016-12-19T02:07:28.051636Z
-426
+2016-12-21T06:23:24.729450Z
+103527
 marie.yeh
 
 

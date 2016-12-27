@@ -1,41 +1,53 @@
 K 25
 svn:wc:ra_dav:version-url
-V 84
-/QCC/!svn/ver/423/QA/TrainingLab/Team2/Marie/ConsoleApplication1/ConsoleApplication1
+V 63
+/SBK/!svn/ver/103527/QA/ConsoleApplication1/ConsoleApplication1
 END
 packages.config
 K 25
 svn:wc:ra_dav:version-url
-V 100
-/QCC/!svn/ver/426/QA/TrainingLab/Team2/Marie/ConsoleApplication1/ConsoleApplication1/packages.config
+V 79
+/SBK/!svn/ver/103527/QA/ConsoleApplication1/ConsoleApplication1/packages.config
 END
 ConsoleApplication1.csproj.user
 K 25
 svn:wc:ra_dav:version-url
-V 116
-/QCC/!svn/ver/409/QA/TrainingLab/Team2/Marie/ConsoleApplication1/ConsoleApplication1/ConsoleApplication1.csproj.user
+V 95
+/SBK/!svn/ver/103527/QA/ConsoleApplication1/ConsoleApplication1/ConsoleApplication1.csproj.user
 END
 App.config
 K 25
 svn:wc:ra_dav:version-url
-V 95
-/QCC/!svn/ver/426/QA/TrainingLab/Team2/Marie/ConsoleApplication1/ConsoleApplication1/App.config
+V 74
+/SBK/!svn/ver/103527/QA/ConsoleApplication1/ConsoleApplication1/App.config
+END
+.gitignore
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/SBK/!svn/ver/103527/QA/ConsoleApplication1/ConsoleApplication1/.gitignore
 END
 ConsoleApplication1.csproj
 K 25
 svn:wc:ra_dav:version-url
-V 111
-/QCC/!svn/ver/426/QA/TrainingLab/Team2/Marie/ConsoleApplication1/ConsoleApplication1/ConsoleApplication1.csproj
+V 90
+/SBK/!svn/ver/103527/QA/ConsoleApplication1/ConsoleApplication1/ConsoleApplication1.csproj
+END
+.gitattributes
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/SBK/!svn/ver/103527/QA/ConsoleApplication1/ConsoleApplication1/.gitattributes
 END
 chromedriver.exe
 K 25
 svn:wc:ra_dav:version-url
-V 101
-/QCC/!svn/ver/234/QA/TrainingLab/Team2/Marie/ConsoleApplication1/ConsoleApplication1/chromedriver.exe
+V 80
+/SBK/!svn/ver/103527/QA/ConsoleApplication1/ConsoleApplication1/chromedriver.exe
 END
 Program.cs
 K 25
 svn:wc:ra_dav:version-url
-V 95
-/QCC/!svn/ver/426/QA/TrainingLab/Team2/Marie/ConsoleApplication1/ConsoleApplication1/Program.cs
+V 74
+/SBK/!svn/ver/103527/QA/ConsoleApplication1/ConsoleApplication1/Program.cs
 END
